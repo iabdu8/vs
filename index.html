@@ -1,181 +1,254 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>V-STUDIO</title>
-  <!-- ملف الـ Manifest الخاص بالـ PWA -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#4A8A9E">
-  <style>
-    :root {
-      --hc-teal: #4A8A9E;
-      --hc-teal-dark: #356878;
-      --hc-teal-light: #eaf4f7;
-      --hc-purple: #8B7BA8;
-      --hc-purple-light: #f0edf6;
-      --bg: #f4f6f8;
-      --surface: #ffffff;
-      --text: #1a1a2e;
-      --muted: #6b7280;
-      --border: #e0e6ea;
-      --shadow: 0 1px 6px rgba(74,138,158,0.10);
-      --radius: 14px;
-      --font: 'Segoe UI', system-ui, sans-serif;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
-    .app { display: flex; flex-direction: column; min-height: 100vh; max-width: 420px; margin: 0 auto; position: relative; background: var(--bg); box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V-STUDIO</title>
+<style>
+  :root {
+    --hc-teal: #4A8A9E;
+    --hc-teal-dark: #356878;
+    --hc-teal-light: #eaf4f7;
+    --hc-purple: #8B7BA8;
+    --hc-purple-light: #f0edf6;
+    --bg: #f4f6f8;
+    --surface: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --border: #e0e6ea;
+    --shadow: 0 1px 6px rgba(74,138,158,0.10);
+    --radius: 14px;
+    --font: 'Segoe UI', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; }
+  .app { display: flex; flex-direction: column; min-height: 100vh; max-width: 420px; margin: 0 auto; position: relative; background: var(--bg); }
 
-    /* LOGIN */
-    .screen { display: none; width: 100%; }
-    .screen.active { display: flex; flex-direction: column; min-height: 100vh; }
-    
-    .login-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; background: #fff; width: 100%; }
-    .login-hero { width: 100%; background: linear-gradient(160deg, var(--hc-teal) 0%, #2d6a7a 60%, var(--hc-purple) 100%); padding: 52px 24px 44px; display: flex; flex-direction: column; align-items: center; }
-    .login-logo-wrap { width: 96px; height: 96px; background: #fff; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; box-shadow: 0 6px 24px rgba(0,0,0,0.18); overflow: hidden; padding: 8px; }
-    .login-logo-wrap img { width: 80px; height: 80px; object-fit: contain; }
-    .login-title { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: 5px; margin-top: 4px; }
-    .login-subtitle { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 5px; letter-spacing: 2px; text-transform: uppercase; }
-    .login-form { width: 100%; padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
-    .form-group { margin-bottom: 14px; }
-    .form-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; display: block; }
-    .form-input, .form-select { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; font-family: var(--font); background: #fafbfc; color: var(--text); outline: none; transition: border-color 0.2s; }
-    .form-input:focus, .form-select:focus { border-color: var(--hc-teal); background: #fff; }
-    .form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
-    .role-picker { display: flex; gap: 8px; }
-    .role-btn { flex: 1; padding: 12px 8px; border: 1.5px solid var(--border); border-radius: 10px; background: #fafbfc; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; color: var(--muted); }
-    .role-btn.active { border-color: var(--hc-teal); background: var(--hc-teal-light); color: var(--hc-teal); font-weight: 700; }
-    .btn-primary { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--hc-teal), var(--hc-teal-dark)); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; }
-    .btn-secondary { width: 100%; padding: 14px; background: transparent; color: var(--hc-teal); border: 1.5px solid var(--hc-teal); border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; }
+  /* LOGIN */
+  .login-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; background: #fff; }
+  .login-hero { width: 100%; background: linear-gradient(160deg, var(--hc-teal) 0%, #2d6a7a 60%, var(--hc-purple) 100%); padding: 52px 24px 44px; display: flex; flex-direction: column; align-items: center; }
+  .login-logo-wrap { width: 96px; height: 96px; background: #fff; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; box-shadow: 0 6px 24px rgba(0,0,0,0.18); overflow: hidden; padding: 8px; }
+  .login-logo-wrap img { width: 80px; height: 80px; object-fit: contain; }
+  .login-title { color: #fff; font-size: 26px; font-weight: 800; letter-spacing: 5px; margin-top: 4px; }
+  .login-subtitle { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 5px; letter-spacing: 2px; text-transform: uppercase; }
+  .login-form { width: 100%; padding: 32px 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .form-group { width: 100%; }
+  .form-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; display: block; text-align: right; }
+  .form-input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; font-family: var(--font); background: #fafbfc; color: var(--text); outline: none; transition: border-color 0.2s; text-align: right; }
+  .form-input:focus { border-color: var(--hc-teal); background: #fff; }
+  .form-select { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 15px; font-family: var(--font); background: #fafbfc; color: var(--text); outline: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: left 12px center; text-align: right; }
+  .role-picker { display: flex; gap: 8px; }
+  .role-btn { flex: 1; padding: 12px 8px; border: 1.5px solid var(--border); border-radius: 10px; background: #fafbfc; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; text-align: center; color: var(--muted); }
+  .role-btn.active { border-color: var(--hc-teal); background: var(--hc-teal-light); color: var(--hc-teal); font-weight: 700; }
+  .btn-primary { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--hc-teal), var(--hc-teal-dark)); color: #fff; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 0.5px; }
+  .btn-secondary { width: 100%; padding: 14px; background: transparent; color: var(--hc-teal); border: 1.5px solid var(--hc-teal); border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; }
 
-    /* TOP BAR */
-    .topbar { background: linear-gradient(135deg, var(--hc-teal) 0%, #2d6a7a 100%); padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; width: 100%; }
-    .topbar-logo { display: flex; align-items: center; gap: 10px; }
-    .topbar-logo-icon { width: 38px; height: 38px; background: #fff; border-radius: 9px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 3px; }
-    .topbar-logo-icon img { width: 32px; height: 32px; object-fit: contain; }
-    .topbar-title { color: #fff; font-size: 17px; font-weight: 800; letter-spacing: 3px; }
-    .topbar-actions { display: flex; align-items: center; gap: 14px; }
-    .topbar-notif { position: relative; cursor: pointer; display: flex; align-items: center; }
-    .notif-dot { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #fbbf24; border-radius: 50%; border: 2px solid var(--hc-teal); }
-    .topbar-avatar { width: 34px; height: 34px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; border: 1.5px solid rgba(255,255,255,0.4); }
+  /* TOP BAR */
+  .topbar { background: linear-gradient(135deg, var(--hc-teal) 0%, #2d6a7a 100%); padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+  .topbar-logo { display: flex; align-items: center; gap: 10px; }
+  .topbar-logo-icon { width: 38px; height: 38px; background: #fff; border-radius: 9px; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 3px; }
+  .topbar-logo-icon img { width: 32px; height: 32px; object-fit: contain; }
+  .topbar-title { color: #fff; font-size: 17px; font-weight: 800; letter-spacing: 3px; }
+  .topbar-actions { display: flex; align-items: center; gap: 14px; }
+  .topbar-avatar { width: 34px; height: 34px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; border: 1.5px solid rgba(255,255,255,0.4); }
 
-    /* MAIN CONTENT AREA */
-    .content { flex: 1; padding: 14px; padding-bottom: 84px; overflow-y: auto; }
-    .branch-banner { background: #fff; padding: 13px 18px; border-bottom: 1px solid var(--border); width: 100%; }
-    .branch-name { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-    .branch-title { font-size: 17px; font-weight: 800; color: var(--text); margin-top: 2px; }
-    
-    /* BOTTOM NAV */
-    .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 420px; background: var(--surface); border-top: 1.5px solid var(--border); display: flex; z-index: 40; }
-    .nav-item { flex: 1; padding: 10px 0 14px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; color: var(--muted); transition: color 0.2s; }
-    .nav-item.active { color: var(--hc-teal); }
-    .nav-item svg { width: 22px; height: 22px; }
-    .nav-label { font-size: 10px; font-weight: 700; }
+  /* BRANCH BANNER */
+  .branch-banner { background: #fff; padding: 13px 18px; border-bottom: 1px solid var(--border); text-align: right; }
+  .branch-name { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .branch-title { font-size: 17px; font-weight: 800; color: var(--text); margin-top: 2px; }
+  .campaign-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--hc-teal-light); color: var(--hc-teal); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; margin-top: 6px; border: 1px solid rgba(74,138,158,0.2); }
 
-    /* TOAST */
-    #toast { position: fixed; bottom: 92px; left: 50%; transform: translateX(-50%); background: #1a2a30; color: #fff; padding: 12px 22px; border-radius: 24px; font-size: 14px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; max-width: 340px; text-align: center; pointer-events: none; }
-  </style>
+  /* CONTENT */
+  .content { flex: 1; padding: 14px; padding-bottom: 84px; overflow-y: auto; text-align: right; }
+  .card { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; margin-bottom: 12px; border: 1px solid var(--border); }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .section-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+  .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--hc-teal); }
+  .stat-label { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 2px; }
+
+  /* NAVIGATION / SCREENS */
+  .screen { display: none; }
+  .screen.active { display: flex; flex-direction: column; min-height: 100vh; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* BOTTOM NAV - Updated for 4 Items */
+  .bottom-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 420px; background: var(--surface); border-top: 1.5px solid var(--border); display: flex; z-index: 40; }
+  .nav-item { flex: 1; padding: 10px 0 14px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; color: var(--muted); transition: color 0.2s; }
+  .nav-item.active { color: var(--hc-teal); }
+  .nav-label { font-size: 11px; font-weight: 700; }
+
+  /* TASKS & GUIDELINES LIST STYLE */
+  .task-item, .guideline-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; text-align: right; }
+  .task-item-header, .guide-item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .task-item-title, .guide-item-title { font-weight: 700; font-size: 14px; }
+  .task-status, .guide-tag { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+  .status-pending { background: #fef3c7; color: #92400e; }
+  .tag-teal { background: var(--hc-teal-light); color: var(--hc-teal); }
+  .tag-purple { background: var(--hc-purple-light); color: var(--hc-purple); }
+
+  /* TOAST */
+  #toast { position: fixed; bottom: 92px; left: 50%; transform: translateX(-50%); background: #1a2a30; color: #fff; padding: 12px 22px; border-radius: 24px; font-size: 14px; font-weight: 500; z-index: 999; opacity: 0; transition: opacity 0.3s; max-width: 340px; text-align: center; pointer-events: none; }
+</style>
 </head>
 <body>
-
 <div class="app">
 
-  <!-- ─── LOGIN SCREEN ─── -->
+  <!-- ─── 1. شاشة تسجيل الدخول ─── -->
   <div id="login-screen" class="screen active">
     <div class="login-screen">
       <div class="login-hero">
         <div class="login-logo-wrap">
-          <img src="logo.png" alt="Home Centre Logo"/>
+          <img src="logo.png" alt="V-Studio Logo"/>
         </div>
-        <div class="login-title">VM-STUDIO</div>
+        <div class="login-title">V-STUDIO</div>
         <div class="login-subtitle">Visual Merchandising Platform</div>
       </div>
       <div class="login-form">
         <div class="form-group">
-          <label class="form-label">Employee ID</label>
-          <input class="form-input" type="text" placeholder="e.g. HC-2847" id="emp-id" value="HC-2847"/>
+          <label class="form-label">الرقم الوظيفي (Employee ID)</label>
+          <input class="form-input" type="text" placeholder="مثال: HC-2847" id="emp-id" value="HC-2847"/>
         </div>
         <div class="form-group">
-          <label class="form-label">Branch</label>
-          <select class="form-select" id="branch-sel">
-            <option>SULTAN MALL</option>
-            <option>JEDDAH PARK</option>
-            <option>BAWADI</option>
-            <option>HADDAB</option>
-            <option>SALAM MALL</option>
-            <option>MALL OF ARABIA</option>
+          <label class="form-label">الفرع (Branch)</label>
+          <select class="select class='form-select'" class="form-select" id="branch-sel">
+            <option>SULTAN MALL</option><option>JEDDAH PARK</option><option>BAWADI</option>
+            <option>HADDAB</option><option>SALAM MALL</option><option>MALL OF ARABIA</option>
           </select>
         </div>
         <div class="form-group">
-          <label class="form-label">Login As</label>
+          <label class="form-label">تسجيل الدخول كـ (Login As)</label>
           <div class="role-picker">
             <div class="role-btn active" id="role-vm" onclick="selectRole('vm')">👷 Visual Merchandiser</div>
             <div class="role-btn" id="role-manager" onclick="selectRole('manager')">👔 Manager</div>
           </div>
         </div>
-        <button class="btn-primary" onclick="doLogin()">Login to VM-Studio</button>
-        <button class="btn-secondary" onclick="toast('Contact your branch manager to register.')">Register Account</button>
-        <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:6px">Home Centre © 2026 · All Rights Reserved</div>
+        <button class="btn-primary" onclick="doLogin()">تسجيل الدخول إلى V-Studio</button>
+        <button class="btn-secondary" onclick="toast('الرجاء التواصل مع مدير الفرع لإنشاء حساب.')">تسجيل حساب جديد</button>
+        <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:6px">Home Centre © 2026 · جميع الحقوق محفوظة</div>
       </div>
     </div>
   </div>
 
-  <!-- ─── VM HOME SCREEN ─── -->
-  <div id="vm-screen" class="screen">
+  <!-- ─── 2. الشاشة الداخلية الرئيسية للتطبيق ─── -->
+  <div id="main-app-screen" class="screen">
+    <!-- الشريط العلوي -->
     <div class="topbar">
       <div class="topbar-logo">
-        <div class="topbar-logo-icon">
-   <img src="logo.png" alt="Home Centre Logo"/>
-        </div>
-        <div class="topbar-title">VM-STUDIO</div>
+        <div class="topbar-logo-icon"><img src="logo.png" alt="Home Centre" style="width:32px;height:32px;object-fit:contain"/></div>
+        <div class="topbar-title">V-STUDIO</div>
       </div>
       <div class="topbar-actions">
-        <div class="topbar-notif" onclick="toast('No new notifications')">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <div class="notif-dot"></div>
-        </div>
-        <div class="topbar-avatar" onclick="logout()">VM</div>
+        <div class="topbar-avatar" onclick="doLogout()">خروج</div>
       </div>
     </div>
 
+    <!-- معلومات الفرع والدخول -->
     <div class="branch-banner">
-      <div class="branch-name">Current Location</div>
+      <div class="branch-name" id="display-emp-role">Visual Merchandiser</div>
       <div class="branch-title" id="display-branch">SULTAN MALL</div>
+      <div class="campaign-chip">✨ حملة ربيع 2026 النشطة</div>
     </div>
 
+    <!-- المحتويات الداخلية المتغيرة تباعاً للقائمة السفلية -->
     <div class="content">
-      <!-- محتوى الشاشة الداخلية للتطبيق يوضع هنا -->
-      <center style="margin-top: 40px; color: var(--muted);">
-        <h3>Welcome to VM-Studio Dashboard</h3>
-        <p style="font-size: 14px; margin-top: 8px;">Logged in successfully.</p>
-      </center>
+      
+      <!-- [صفحة 1] صفحة المهام اليومية -->
+      <div id="page-tasks" class="page active">
+        <div class="section-label">نظرة عامة على الإحصائيات</div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">12</div>
+            <div class="stat-label">مهمة مكتملة</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color: var(--hc-purple);">4</div>
+            <div class="stat-label">مهام قيد التنفيذ</div>
+          </div>
+        </div>
+
+        <div class="section-label">قائمة المهام اليومية (Tasks)</div>
+        <div class="task-item">
+          <div class="task-item-header">
+            <span class="task-status status-pending">قيد الانتظار</span>
+            <div class="task-item-title">تحديث واجهة العرض الزجاجية الأمامية لـ غرف المعيشة</div>
+          </div>
+        </div>
+        <div class="task-item">
+          <div class="task-item-header">
+            <span class="task-status status-pending">انتظار المدير</span>
+            <div class="task-item-title">إعادة ترتيب قسم مستلزمات وديكورات الحائط</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [صفحة 2] صفحة الدليل الإرشادي (Guidelines) - تمت إضافتها حديثاً -->
+      <div id="page-guidelines" class="page">
+        <div class="section-label">أدلة التنسيق البصري (Guidelines)</div>
+        <div class="guideline-item" style="cursor: pointer;" onclick="toast('جاري تحميل دليل ربيع 2026 PDF...')">
+          <div class="guide-item-header">
+            <span class="guide-tag tag-teal">تنسيق الأثاث</span>
+            <div class="guide-item-title">دليل تنسيق غرف المعيشة والمساحات المفتوحة لـ ربيع 2026</div>
+          </div>
+        </div>
+        <div class="guideline-item" style="cursor: pointer;" onclick="toast('جاري فتح موجهات الإضاءة...')">
+          <div class="guide-item-header">
+            <span class="guide-tag tag-purple">توزيع الإضاءة</span>
+            <div class="guide-item-title">معايير توجيه زوايا الإضاءة المركزة (Spotlights) على المنصات</div>
+          </div>
+        </div>
+        <div class="guideline-item" style="cursor: pointer;" onclick="toast('جاري فتح معايير الـ Accessories...')">
+          <div class="guide-item-header">
+            <span class="guide-tag tag-teal">الديكورات</span>
+            <div class="guide-item-title">قواعد توزيع الإكسسوارات والمزهريات على أسطح الطاولات (Rule of Three)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- [صفحة 3] صفحة التقارير -->
+      <div id="page-reports" class="page">
+        <div class="card">
+          <div class="card-title">📝 التقارير المرفوعة (Reports)</div>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">لا توجد تقارير معلقة حالياً للفرع المحدد.</p>
+        </div>
+      </div>
+
+      <!-- [صفحة 4] صفحة المحادثة -->
+      <div id="page-chat" class="page">
+        <div class="card">
+          <div class="card-title">💬 غرف الدردشة الجماعية</div>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 10px;">سيتم مزامنة المحادثات الفورية مع فريق العمل قريباً.</p>
+        </div>
+      </div>
+
     </div>
 
-    <!-- BOTTOM NAV -->
+    <!-- القائمة السفلية للتنقل (Bottom Navigation) تم تحديثها لـ 4 أزرار متساوية -->
     <div class="bottom-nav">
-      <div class="nav-item active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-        <div class="nav-label">Home</div>
+      <div class="nav-item active" id="nav-tasks" onclick="switchPage('tasks')">
+        <div class="nav-label">📋 المهام</div>
       </div>
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-        <div class="nav-label">Tasks</div>
+      <div class="nav-item" id="nav-guidelines" onclick="switchPage('guidelines')">
+        <div class="nav-label">📖 الدليل</div>
       </div>
-      <div class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <div class="nav-label">Chat</div>
+      <div class="nav-item" id="nav-reports" onclick="switchPage('reports')">
+        <div class="nav-label">📊 التقارير</div>
+      </div>
+      <div class="nav-item" id="nav-chat" onclick="switchPage('chat')">
+        <div class="nav-label">💬 المحادثة</div>
       </div>
     </div>
   </div>
 
-  <!-- TOAST -->
-  <div id="toast"></div>
+  <!-- التنبيهات العائمة (Toast) -->
+  <div id="toast">تنبيه نظام V-Studio</div>
 
 </div>
 
+<!-- الجزء البرمجي (JavaScript) -->
 <script>
   let currentRole = 'vm';
 
@@ -196,20 +269,32 @@
     const branch = document.getElementById('branch-sel').value;
 
     if(!empId) {
-      toast('Please enter your Employee ID');
+      toast('الرجاء إدخال الرقم الوظيفي أولاً!');
       return;
     }
 
     document.getElementById('display-branch').innerText = branch;
+    document.getElementById('display-emp-role').innerText = currentRole === 'vm' ? 'Senior Visual Merchandiser' : 'Branch Manager';
+
     document.getElementById('login-screen').classList.remove('active');
-    document.getElementById('vm-screen').classList.add('active');
-    toast('Logged in as ' + (currentRole === 'vm' ? 'Visual Merchandiser' : 'Manager'));
+    document.getElementById('main-app-screen').classList.add('active');
+    
+    toast('تم تسجيل الدخول بنجاح واجهة ' + branch);
   }
 
-  function logout() {
-    document.getElementById('vm-screen').classList.remove('active');
+  function doLogout() {
+    document.getElementById('main-app-screen').classList.remove('active');
     document.getElementById('login-screen').classList.add('active');
-    toast('Logged out');
+    toast('تم تسجيل الخروج بنجاح.');
+  }
+
+  // دعم التنقل المتكامل بما فيها صفحة الـ Guidelines الجديدة
+  function switchPage(pageName) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    document.getElementById('page-' + pageName).classList.add('active');
+    document.getElementById('nav-' + pageName).classList.add('active');
   }
 
   function toast(msg) {
@@ -217,15 +302,6 @@
     t.innerText = msg;
     t.style.opacity = '1';
     setTimeout(() => { t.style.opacity = '0'; }, 3000);
-  }
-
-  // تسجيل الـ Service Worker لـ PWA
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('Service Worker Registered!', reg))
-        .catch(err => console.log('Service Worker Base Registration Failed', err));
-    });
   }
 </script>
 </body>
